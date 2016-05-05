@@ -35,17 +35,13 @@ int minus(dt d1, dt d2)
     int d1_l = leap(d1.year), d2_l = leap(d2.year);
     int y, m;
     int total_days = 0;
-
+    int total_days_2 = 0;
+    print_dt(d1);
+    print_dt(d2);
     for (y = d1.year; y >= d2.year ; y--) {
         if (y == d1.year) {
             for (m = d1.month ; m >= 1 ; m--) {
                 if (m == d1.month)  total_days += d1.day;
-                else                total_days += daysPerMonth[leap(y)][m];
-                // printf("%d - %5s - %d - %d \n", y, month[m], daysPerMonth[leap(y)][m], total_days);
-            }
-        } else if (y == d2.year) {
-            for (m = 12 ; m >= d2.month ; m--) {
-                if (m == d2.month)  total_days += daysPerMonth[leap(y)][m] - d2.day;
                 else                total_days += daysPerMonth[leap(y)][m];
                 // printf("%d - %5s - %d - %d \n", y, month[m], daysPerMonth[leap(y)][m], total_days);
             }
@@ -55,10 +51,17 @@ int minus(dt d1, dt d2)
                 // printf("%d - %5s - %d - %d \n", y, month[m], daysPerMonth[leap(y)][m], total_days);
             }
         }
+        if (y == d2.year) {
+            for (m = d2.month ; m >= 1 ; m--) {
+                if (m == d2.month)  total_days_2 += d2.day;
+                else                total_days_2 += daysPerMonth[leap(y)][m];
+                // printf("%d - %5s - %d - %d \n", y, month[m], daysPerMonth[leap(y)][m], total_days);
+            }
+        } 
 
     }
-
-    return total_days;
+    printf("\n Totaldays:%d Totaldays_2:%d\n",total_days,total_days_2);
+    return total_days - total_days_2;
 }
 
 int main(void)
